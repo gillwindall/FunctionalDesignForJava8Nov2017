@@ -8,15 +8,15 @@ import java.util.List;
 ////  void doStuff();
 //}
 
-@FunctionalInterface
-interface Criterion<E> {
-//  void doStuff();
-  boolean test(E c);
-}
+//@FunctionalInterface
+//interface Criterion<E> {
+////  void doStuff();
+//  boolean test(E c);
+//}
 
-interface Silly {
-  boolean daft(Car c);
-}
+//interface Silly {
+//  boolean daft(Car c);
+//}
 
 //class RedCarCriterion implements Criterion {
 //  @Override
@@ -134,13 +134,19 @@ public class UseCars {
 //    showAll(getGasLevelCars(fleet, 5));
 
       showAll(getByCriterion(fleet, Car.getRedCarCriterion()));
-      showAll(getByCriterion(fleet, new Car.LowGasCriterion(7)));
-      showAll(getByCriterion(fleet, c -> c.getColor().equals("Green")));
+//      showAll(getByCriterion(fleet, new Car.LowGasCriterion(7)));
+      showAll(getByCriterion(fleet, Car.getFuelLevelCriterion(5)));
+      
+      System.exit(0);
+      // sometimes, assignemmt to intermediate variable helps
+      // both you and the compiler know what's happening!
+      Criterion<Car> carCrit = c -> c.getColor().equals("Green");
+      showAll(getByCriterion(fleet, carCrit));
       showAll(getByCriterion(fleet, Car.getOneOfManyBlueCriteria()));
       
 //      Silly crit = (c -> c.getColor().equals("Black"));
 //      boolean b = ((Criterion)(c -> c.getColor().equals("Black"))).test(new Car("Black", 0));
-      boolean b = ((Silly)(c -> c.getColor().equals("Black"))).daft(new Car("Black", 0));
+//      boolean b = ((Silly)(c -> c.getColor().equals("Black"))).daft(new Car("Black", 0));
 
       List<String> ls = Arrays.asList("Fred", "Jim", "Sheila", "womble", "banana");
         

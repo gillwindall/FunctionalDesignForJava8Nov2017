@@ -89,19 +89,54 @@ public class Car {
   public static Criterion<Car> getRedCarCriterion() {
     return redCarCriterion;
   }
-  
-  static class LowGasCriterion implements Criterion<Car> {
 
-    private int threshold;
-
-    public LowGasCriterion(int threshold) {
-      this.threshold = threshold;
-    }
-
-    @Override
-    public boolean test(Car c) {
-      return c.getFuel() < threshold;
-    }
+  public static Criterion<Car> getFuelLevelCriterion(int threshold) {
+    return c -> c.getFuel() < threshold;
   }
 
+//  public static Criterion<Car> getFuelLevelCriterion(int threshold) {
+//    return new Criterion<Car>() {
+//      @Override
+//      public boolean test(Car c) {
+//        return c.getFuel() < threshold;
+//      }
+//    };
+//  }
+//
+//  public static Criterion getFuelLevelCriterion(int threshold) {
+//    return new //LowGasCriterion(threshold);
+////  }
+//  
+//    /*static class LowGasCriterion implements */Criterion<Car>() {
+//
+////      private int threshold;
+////
+////      public LowGasCriterion(int threshold) {
+////        this.threshold = threshold;
+////      }
+//
+//      @Override
+//      public boolean test(Car c) {
+//        return c.getFuel() < threshold;
+//      }
+//    };
+//  }
+//  
+//  public static Criterion getFuelLevelCriterion(int threshold) {
+//    return new LowGasCriterion(threshold);
+//  }
+//  
+//  static class LowGasCriterion implements Criterion<Car> {
+//
+//    private int threshold;
+//
+//    public LowGasCriterion(int threshold) {
+//      this.threshold = threshold;
+//    }
+//
+//    @Override
+//    public boolean test(Car c) {
+//      return c.getFuel() < threshold;
+//    }
+//  }
 }
