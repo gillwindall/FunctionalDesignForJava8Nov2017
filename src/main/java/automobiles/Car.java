@@ -48,44 +48,8 @@ public class Car {
   public static Criterion<Car> getOneOfManyBlueCriteria() {
     return c -> c.getColor().equals("Blue");
   }
-  // lambda version 2
-  private static final Criterion<Car> redCarCriterion = c -> c.getColor().equals("Red");
-//  private static final Criterion redCarCriterion = (Car c) -> c.getColor().equals("Red");
 
-//  // lambda version 2
-//  private static final Criterion redCarCriterion = c -> /*{
-//      return */ c.getColor().equals("Red")/*;*/
-//    /*}*/;
-//
-//  // lambda version 1 cleaned up
-//  private static final Criterion redCarCriterion = (c) -> {
-//      return c.getColor().equals("Red");
-//    };
-//
-// Lambda version 1  
-//  private static final Criterion redCarCriterion = /*new Criterion() {*/
-//    /*@Override
-//    public boolean test*/(/*Car*/ c) -> {
-//      return c.getColor().equals("Red");
-//    }
-//  /*}*/;
-//
-// anonymous inner implementation  
-//  private static final Criterion redCarCriterion = new Criterion() {
-//    @Override
-//    public boolean test(Car c) {
-//      return c.getColor().equals("Red");
-//    }
-//  };
-//  
-//  private static final Criterion redCarCriterion = new /*RedCarCriterion();
-//  private static class RedCarCriterion implements */Criterion() {
-//    @Override
-//    public boolean test(Car c) {
-//      return c.getColor().equals("Red");
-//    }
-//  };
-//  
+  private static final Criterion<Car> redCarCriterion = c -> c.getColor().equals("Red");
   public static Criterion<Car> getRedCarCriterion() {
     return redCarCriterion;
   }
@@ -93,50 +57,4 @@ public class Car {
   public static Criterion<Car> getFuelLevelCriterion(int threshold) {
     return c -> c.getFuel() < threshold;
   }
-
-//  public static Criterion<Car> getFuelLevelCriterion(int threshold) {
-//    return new Criterion<Car>() {
-//      @Override
-//      public boolean test(Car c) {
-//        return c.getFuel() < threshold;
-//      }
-//    };
-//  }
-//
-//  public static Criterion getFuelLevelCriterion(int threshold) {
-//    return new //LowGasCriterion(threshold);
-////  }
-//  
-//    /*static class LowGasCriterion implements */Criterion<Car>() {
-//
-////      private int threshold;
-////
-////      public LowGasCriterion(int threshold) {
-////        this.threshold = threshold;
-////      }
-//
-//      @Override
-//      public boolean test(Car c) {
-//        return c.getFuel() < threshold;
-//      }
-//    };
-//  }
-//  
-//  public static Criterion getFuelLevelCriterion(int threshold) {
-//    return new LowGasCriterion(threshold);
-//  }
-//  
-//  static class LowGasCriterion implements Criterion<Car> {
-//
-//    private int threshold;
-//
-//    public LowGasCriterion(int threshold) {
-//      this.threshold = threshold;
-//    }
-//
-//    @Override
-//    public boolean test(Car c) {
-//      return c.getFuel() < threshold;
-//    }
-//  }
 }
