@@ -25,7 +25,7 @@ public class Car {
   public List<String> getTrunk() {
     return trunk;
   }
-  
+
   public Car(String color, int fuel, String... passengers) {
     this.color = color;
     this.fuel = fuel;
@@ -44,4 +44,31 @@ public class Car {
     return "Car{" + "color=" + color + ", fuel=" + fuel
         + ", passengers=" + passengers + ", trunk=" + trunk + '}';
   }
+
+  private static final Criterion redCarCriterion = new RedCarCriterion();
+  private static class RedCarCriterion implements Criterion {
+    @Override
+    public boolean test(Car c) {
+      return c.getColor().equals("Red");
+    }
+  }
+  
+  public static Criterion getRedCarCriterion() {
+    return redCarCriterion;
+  }
+  
+  static class LowGasCriterion implements Criterion {
+
+    private int threshold;
+
+    public LowGasCriterion(int threshold) {
+      this.threshold = threshold;
+    }
+
+    @Override
+    public boolean test(Car c) {
+      return c.getFuel() < threshold;
+    }
+  }
+
 }

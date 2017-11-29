@@ -8,24 +8,24 @@ interface Criterion {
   boolean test(Car c);
 }
 
-class RedCarCriterion implements Criterion {
-  @Override
-  public boolean test(Car c) {
-    return c.getColor().equals("Red");
-  }
-}
-
-class LowGasCriterion implements Criterion {
-  private int threshold;
-  public LowGasCriterion(int threshold) {
-    this.threshold = threshold;
-  }
-  
-  @Override
-  public boolean test(Car c) {
-    return c.getFuel() < threshold;
-  }
-}
+//class RedCarCriterion implements Criterion {
+//  @Override
+//  public boolean test(Car c) {
+//    return c.getColor().equals("Red");
+//  }
+//}
+//
+//class LowGasCriterion implements Criterion {
+//  private int threshold;
+//  public LowGasCriterion(int threshold) {
+//    this.threshold = threshold;
+//  }
+//  
+//  @Override
+//  public boolean test(Car c) {
+//    return c.getFuel() < threshold;
+//  }
+//}
 
 public class UseCars {
 
@@ -83,7 +83,7 @@ public class UseCars {
 //    showAll(fleet);
 //    showAll(getGasLevelCars(fleet, 5));
 
-      showAll(getCarsByCriterion(fleet, new RedCarCriterion()));
-      showAll(getCarsByCriterion(fleet, new LowGasCriterion(7)));
+      showAll(getCarsByCriterion(fleet, Car.getRedCarCriterion()));
+      showAll(getCarsByCriterion(fleet, new Car.LowGasCriterion(7)));
   }
 }
