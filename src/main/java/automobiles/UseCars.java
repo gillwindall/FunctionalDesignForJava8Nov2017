@@ -1,10 +1,64 @@
 package automobiles;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+interface Criterion {
+  boolean test(Car c);
+}
+
+class RedCarCriterion implements Criterion {
+  @Override
+  public boolean test(Car c) {
+    return c.getColor().equals("Red");
+  }
+}
+
+class LowGasCriterion implements Criterion {
+  private int threshold;
+  public LowGasCriterion(int threshold) {
+    this.threshold = threshold;
+  }
+  
+  @Override
+  public boolean test(Car c) {
+    return c.getFuel() < threshold;
+  }
+}
+
 public class UseCars {
 
+//  public static List<Car> getColoredCars(List<Car> in, String color) {
+//    List<Car> out = new ArrayList<>();
+//    for (Car c : in) {
+//      if (c.getColor().equals(color)) {
+//        out.add(c);
+//      }
+//    }
+//    return out;
+//  }
+//  
+//  public static List<Car> getGasLevelCars(List<Car> in, int threshold) {
+//    List<Car> out = new ArrayList<>();
+//    for (Car c : in) {
+//      if (c.getFuel() >= threshold) {
+//        out.add(c);
+//      }
+//    }
+//    return out;
+//  }
+  
+  public static List<Car> getCarsByCriterion(List<Car> in, Criterion crit) {
+    List<Car> out = new ArrayList<>();
+    for (Car c : in) {
+      if (crit.test(c)) {
+        out.add(c);
+      }
+    }
+    return out;
+  }
+  
   public static void showAll(List<Car> lc) {
     for (Car c : lc) {
       System.out.println("> " + c);
@@ -23,5 +77,13 @@ public class UseCars {
     );
 
     showAll(fleet);
+    
+//    showAll(getColoredCars(fleet, "Red"));
+//    
+//    showAll(fleet);
+//    showAll(getGasLevelCars(fleet, 5));
+
+      showAll(getCarsByCriterion(fleet, new RedCarCriterion()));
+      showAll(getCarsByCriterion(fleet, new LowGasCriterion(7)));
   }
 }
