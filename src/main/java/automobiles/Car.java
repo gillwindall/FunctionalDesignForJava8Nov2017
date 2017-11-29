@@ -45,11 +45,11 @@ public class Car {
         + ", passengers=" + passengers + ", trunk=" + trunk + '}';
   }
 
-  public static Criterion getOneOfManyBlueCriteria() {
+  public static Criterion<Car> getOneOfManyBlueCriteria() {
     return c -> c.getColor().equals("Blue");
   }
   // lambda version 2
-  private static final Criterion redCarCriterion = c -> c.getColor().equals("Red");
+  private static final Criterion<Car> redCarCriterion = c -> c.getColor().equals("Red");
 //  private static final Criterion redCarCriterion = (Car c) -> c.getColor().equals("Red");
 
 //  // lambda version 2
@@ -86,11 +86,11 @@ public class Car {
 //    }
 //  };
 //  
-  public static Criterion getRedCarCriterion() {
+  public static Criterion<Car> getRedCarCriterion() {
     return redCarCriterion;
   }
   
-  static class LowGasCriterion implements Criterion {
+  static class LowGasCriterion implements Criterion<Car> {
 
     private int threshold;
 
