@@ -45,14 +45,47 @@ public class Car {
         + ", passengers=" + passengers + ", trunk=" + trunk + '}';
   }
 
-  private static final Criterion redCarCriterion = new RedCarCriterion();
-  private static class RedCarCriterion implements Criterion {
-    @Override
-    public boolean test(Car c) {
-      return c.getColor().equals("Red");
-    }
+  public static Criterion getOneOfManyBlueCriteria() {
+    return c -> c.getColor().equals("Blue");
   }
-  
+  // lambda version 2
+  private static final Criterion redCarCriterion = c -> c.getColor().equals("Red");
+//  private static final Criterion redCarCriterion = (Car c) -> c.getColor().equals("Red");
+
+//  // lambda version 2
+//  private static final Criterion redCarCriterion = c -> /*{
+//      return */ c.getColor().equals("Red")/*;*/
+//    /*}*/;
+//
+//  // lambda version 1 cleaned up
+//  private static final Criterion redCarCriterion = (c) -> {
+//      return c.getColor().equals("Red");
+//    };
+//
+// Lambda version 1  
+//  private static final Criterion redCarCriterion = /*new Criterion() {*/
+//    /*@Override
+//    public boolean test*/(/*Car*/ c) -> {
+//      return c.getColor().equals("Red");
+//    }
+//  /*}*/;
+//
+// anonymous inner implementation  
+//  private static final Criterion redCarCriterion = new Criterion() {
+//    @Override
+//    public boolean test(Car c) {
+//      return c.getColor().equals("Red");
+//    }
+//  };
+//  
+//  private static final Criterion redCarCriterion = new /*RedCarCriterion();
+//  private static class RedCarCriterion implements */Criterion() {
+//    @Override
+//    public boolean test(Car c) {
+//      return c.getColor().equals("Red");
+//    }
+//  };
+//  
   public static Criterion getRedCarCriterion() {
     return redCarCriterion;
   }

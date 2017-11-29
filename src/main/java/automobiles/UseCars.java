@@ -4,8 +4,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-interface Criterion {
+interface Boring {
+//  void doStuff();
+}
+
+@FunctionalInterface
+interface Criterion extends Boring {
+//  void doStuff();
   boolean test(Car c);
+}
+
+interface Silly {
+  boolean daft(Car c);
 }
 
 //class RedCarCriterion implements Criterion {
@@ -48,6 +58,20 @@ public class UseCars {
 //    }
 //    return out;
 //  }
+
+  interface CriterionOfString {
+    boolean test(String s);
+  }
+// find strings by criterion-like behavior  
+  public static List<String> getStringByCriterion(List<String> in, CriterionOfString crit) {
+    List<String> out = new ArrayList<>();
+    for (String c : in) {
+      if (crit.test(c)) {
+        out.add(c);
+      }
+    }
+    return out;
+  }
   
   public static List<Car> getCarsByCriterion(List<Car> in, Criterion crit) {
     List<Car> out = new ArrayList<>();
@@ -85,5 +109,11 @@ public class UseCars {
 
       showAll(getCarsByCriterion(fleet, Car.getRedCarCriterion()));
       showAll(getCarsByCriterion(fleet, new Car.LowGasCriterion(7)));
+      showAll(getCarsByCriterion(fleet, c -> c.getColor().equals("Green")));
+      showAll(getCarsByCriterion(fleet, Car.getOneOfManyBlueCriteria()));
+      
+//      Silly crit = (c -> c.getColor().equals("Black"));
+//      boolean b = ((Criterion)(c -> c.getColor().equals("Black"))).test(new Car("Black", 0));
+      boolean b = ((Silly)(c -> c.getColor().equals("Black"))).daft(new Car("Black", 0));
   }
 }
