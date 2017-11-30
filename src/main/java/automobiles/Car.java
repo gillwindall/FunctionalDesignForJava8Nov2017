@@ -54,7 +54,10 @@ public class Car {
     return redCarCriterion;
   }
 
-  public static Criterion<Car> getFuelLevelCriterion(int threshold) {
+  // prior to Java 8, have to say final..
+  // Now, only must not change it!
+  public static Criterion<Car> getFuelLevelCriterion(final int threshold) {
+//    threshold ++;
     return c -> c.getFuel() < threshold;
   }
 }

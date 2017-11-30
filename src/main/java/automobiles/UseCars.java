@@ -39,11 +39,26 @@ public class UseCars {
       showAll(getByCriterion(fleet, Car.getFuelLevelCriterion(5)));
       
       Criterion<Car> carCrit = c -> c.getColor().equals("Green");
+      System.out.println("Green:");
       showAll(getByCriterion(fleet, carCrit));
+      
+      // static member version
+//      Criterion<Car> notGreen = Criterion.negate(carCrit);
+      Criterion<Car> notGreen = carCrit.negate();
+      System.out.println("Not Green:");
+      showAll(getByCriterion(fleet, notGreen));
+      
+      System.out.println("Less than six fuel and not Green");
+      showAll(getByCriterion(fleet, notGreen.and(Car.getFuelLevelCriterion(6))));
+      
       showAll(getByCriterion(fleet, Car.getOneOfManyBlueCriteria()));
+      
+      
       
       List<String> ls = Arrays.asList("Fred", "Jim", "Sheila", "womble", "banana");
       showAll(getByCriterion(ls, s -> s.length() > 4));
       showAll(getByCriterion(ls, s -> Character.isUpperCase(s.charAt(0))));
+      
+      
   }
 }
