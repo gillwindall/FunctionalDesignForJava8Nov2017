@@ -2,6 +2,7 @@ package automobiles;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Car {
 
@@ -45,18 +46,18 @@ public class Car {
         + ", passengers=" + passengers + ", trunk=" + trunk + '}';
   }
 
-  public static Criterion<Car> getOneOfManyBlueCriteria() {
+  public static Predicate<Car> getOneOfManyBlueCriteria() {
     return c -> c.getColor().equals("Blue");
   }
 
-  private static final Criterion<Car> redCarCriterion = c -> c.getColor().equals("Red");
-  public static Criterion<Car> getRedCarCriterion() {
+  private static final Predicate<Car> redCarCriterion = c -> c.getColor().equals("Red");
+  public static Predicate<Car> getRedCarCriterion() {
     return redCarCriterion;
   }
 
   // prior to Java 8, have to say final..
   // Now, only must not change it!
-  public static Criterion<Car> getFuelLevelCriterion(final int threshold) {
+  public static Predicate<Car> getFuelLevelCriterion(final int threshold) {
 //    threshold ++;
     return c -> c.getFuel() < threshold;
   }
