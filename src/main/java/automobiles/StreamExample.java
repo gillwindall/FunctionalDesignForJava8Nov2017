@@ -38,9 +38,11 @@ public class StreamExample {
     fleet.stream().forEach(x -> System.out.println(x));;
     System.out.println("-------------");
     fleet.stream()
+        .parallel() // won't improve anything here.
         .filter(c -> c.getColor().equals("Blue"))
         .flatMap(c -> c.getPassengers().stream()
             .map(x -> x + " is in a " + c.getColor() + " car "))
-        .forEach(x -> System.out.println(x));
+        .forEach(System.out::println);
+//        .forEach(x -> System.out.println(x));
   }
 }
