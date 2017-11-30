@@ -2,8 +2,10 @@ package automobiles;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -42,22 +44,35 @@ public class SuperIterable<E> implements Iterable<E> {
     return new SuperIterable<>(out);
   }
 
+  public SuperIterable<E> distinct() {
+    Set<E> out = new HashSet<>();
+    self.forEach(e -> out.add(e));
+    return new SuperIterable<>(out);
+  }
+  
+// Iterator defines forEach, which does this...  
+//  public void forEvery(Consumer<E> op) {
+//    for (E e : self) {
+//      op.accept(e);
+//    }
+//  }
+//  
   @Override
   public Iterator<E> iterator() {
     return self.iterator();
   }
 
-  public static void showAll(Iterable<?> i) {
-    for (Object x : i) {
-      System.out.println(x);
-    }
+  public static void showAll(SuperIterable<?> i) {
+    i.forEach(x -> System.out.println(x));
     System.out.println("----------------------------------");
   }
+  
   public static void main(String[] args) {
     SuperIterable<String> stringIter = new SuperIterable<>(Arrays.asList(
       "Fred", "womble", "Jim", "Sheila", "banana"));
     
-    showAll(stringIter);
+    stringIter.forEach(x -> System.out.println(x));
+    System.out.println("-------------");
     showAll(stringIter.filter(x -> x.length() > 4));
     showAll(stringIter);
     showAll(stringIter.filter(x -> x.length() > 4).map(x -> x.toUpperCase()));
