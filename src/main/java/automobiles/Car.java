@@ -1,6 +1,7 @@
 package automobiles;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -48,6 +49,14 @@ public class Car {
 
   public static Predicate<Car> getOneOfManyBlueCriteria() {
     return c -> c.getColor().equals("Blue");
+  }
+  
+  public static Comparator<Car> getFuelComparator() {
+     return (c1, c2) -> c1.getFuel() > c2.getFuel() ? 1 : (c1.getFuel() < c2.getFuel() ? -1 : 0);
+  }
+  
+  public static <X> Predicate<X> getlessThanPredicate(Comparator<X> comp, X other) {
+     return c -> comp.compare(c, other) < 0;
   }
 
   private static final Predicate<Car> redCarCriterion = c -> c.getColor().equals("Red");

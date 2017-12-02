@@ -12,6 +12,10 @@ public interface Criterion<E> {
     return x -> this.test(x) && second.test(x);
   }
   
+  default Criterion<E> or(Criterion<E> other) {
+     return x -> this.test(x) || other.test(x);
+  }
+  
 //  public static <X> Criterion<X> negate(Criterion<X> crit) {
 //    return x -> ! crit.test(x);
 //  }
